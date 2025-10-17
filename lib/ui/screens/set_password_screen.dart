@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager/ui/screens/forgot_password_verify_otp_screen.dart';
 import 'package:task_manager/ui/screens/login_screen.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 
@@ -53,7 +52,7 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
                   ),
                   const SizedBox(height: 16),
                   FilledButton(
-                    onPressed: (){},
+                    onPressed: _onTapNextButton,
                     child: Text('Confirm', style: TextStyle(
                       fontSize: 15,
                       color: Colors.white,
@@ -101,7 +100,7 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
   void _onTapNextButton() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ForgotPasswordVerifyOtpScreen()),
+      MaterialPageRoute(builder: (context) => LoginScreen()),
     );
   }
 
