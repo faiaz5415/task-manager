@@ -53,7 +53,7 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
                   ),
                   const SizedBox(height: 16),
                   FilledButton(
-                    onPressed: _onTapNextButton,
+                    onPressed: (){},
                     child: Text('Confirm', style: TextStyle(
                       fontSize: 15,
                       color: Colors.white,

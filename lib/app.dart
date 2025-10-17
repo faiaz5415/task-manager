@@ -34,6 +34,9 @@ class TaskManagerApp extends StatelessWidget {
               )
           ),
         ),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
       ),
       home: SplashScreen(),
     );
