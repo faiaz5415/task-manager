@@ -6,6 +6,9 @@ import 'package:task_manager/ui/widgets/screen_background.dart';
 class SetPasswordScreen extends StatefulWidget {
   const SetPasswordScreen({super.key});
 
+  static const String name = '/set-password';
+
+
   @override
   State<SetPasswordScreen> createState() => _SetPasswordScreenState();
 }
@@ -91,16 +94,16 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
   }
 
   void _onTapSignInButton() {
-    Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
+      LoginScreen.name
     );
   }
 
   void _onTapNextButton() {
-    Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
+      LoginScreen.name
     );
   }
 

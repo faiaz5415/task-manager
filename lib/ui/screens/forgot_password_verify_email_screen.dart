@@ -7,6 +7,9 @@ import 'package:task_manager/ui/widgets/screen_background.dart';
 class ForgotPasswordVerifyEmailScreen extends StatefulWidget {
   const ForgotPasswordVerifyEmailScreen({super.key});
 
+  static const String name = '/forgot-password-email';
+
+
   @override
   State<ForgotPasswordVerifyEmailScreen> createState() =>
       _ForgotPasswordVerifyEmailScreenState();
@@ -84,16 +87,16 @@ class _ForgotPasswordVerifyEmailScreenState
   }
 
   void _onTapSignInButton() {
-    Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
+      LoginScreen.name
     );
   }
 
   void _onTapNextButton() {
-    Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(builder: (context) => ForgotPasswordVerifyOtpScreen()),
+      ForgotPasswordVerifyOtpScreen.name,
     );
   }
 

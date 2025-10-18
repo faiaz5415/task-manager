@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/ui/screens/forgot_password_verify_email_screen.dart';
+import 'package:task_manager/ui/screens/forgot_password_verify_otp_screen.dart';
+import 'package:task_manager/ui/screens/login_screen.dart';
+import 'package:task_manager/ui/screens/main_nav_bar_holder_screen.dart';
+import 'package:task_manager/ui/screens/set_password_screen.dart';
+import 'package:task_manager/ui/screens/sign_up_screen.dart';
 import 'package:task_manager/ui/screens/splash_screen.dart';
+import 'package:task_manager/ui/screens/update_profile_screen.dart';
 
 class TaskManagerApp extends StatelessWidget {
   const TaskManagerApp({super.key});
@@ -38,7 +45,18 @@ class TaskManagerApp extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      home: SplashScreen(),
+      initialRoute: SplashScreen.name,
+      routes: {
+        SplashScreen.name : (_) => SplashScreen(),
+        LoginScreen.name : (_) => LoginScreen(),
+        SignUpScreen.name : (_) => SignUpScreen(),
+        MainNavBarHolderScreen.name : (_) => MainNavBarHolderScreen(),
+        UpdateProfileScreen.name : (_) => UpdateProfileScreen(),
+        ForgotPasswordVerifyEmailScreen.name : (_) => ForgotPasswordVerifyEmailScreen(),
+        ForgotPasswordVerifyOtpScreen.name : (_) => ForgotPasswordVerifyOtpScreen(),
+        SetPasswordScreen.name : (_) => SetPasswordScreen(),
+
+      },
     );
   }
 }

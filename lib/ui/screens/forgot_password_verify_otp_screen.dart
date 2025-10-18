@@ -10,6 +10,9 @@ import 'package:task_manager/ui/widgets/screen_background.dart';
 class ForgotPasswordVerifyOtpScreen extends StatefulWidget {
   const ForgotPasswordVerifyOtpScreen({super.key});
 
+  static const String name = '/forgot-password-otp';
+
+
   @override
   State<ForgotPasswordVerifyOtpScreen> createState() => _ForgotPasswordVerifyOtpScreenState();
 }
@@ -102,12 +105,12 @@ class _ForgotPasswordVerifyOtpScreenState extends State<ForgotPasswordVerifyOtpS
   }
 
   void _onTapSignInButton(){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    Navigator.pushNamed(context, LoginScreen.name);
   }
 
 
   void _onTapSetPasswordButton(){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SetPasswordScreen()));
+    Navigator.pushNamed(context, SetPasswordScreen.name);
   }
 
 

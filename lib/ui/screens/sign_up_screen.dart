@@ -6,6 +6,9 @@ import 'package:task_manager/ui/widgets/screen_background.dart';
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
+  static const String name = '/sign-up';
+
+
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
@@ -64,7 +67,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   const SizedBox(height: 16),
                   FilledButton(
-                    onPressed: () {},
+                    onPressed: _onTapLoginButton,
                     child: Icon(Icons.arrow_circle_right_outlined),
                   ),
                   SizedBox(height: 36),
@@ -100,10 +103,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _onTapLoginButton() {
-    Navigator.pushAndRemoveUntil(
+    Navigator.pushNamedAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => const LoginScreen()),
-          (route) => false,
+          LoginScreen.name,
+          (predicate) => false,
     );
   }
 
