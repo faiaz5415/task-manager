@@ -27,7 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       body: ScreenBackground(
         child: Padding(
-          padding: const EdgeInsets.all(18.0),
+          padding: const EdgeInsets.all(19.0),
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
