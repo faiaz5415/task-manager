@@ -1,117 +1,110 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
-import 'package:logger/logger.dart';
 
-class ApiCaller {
-  static final Logger _logger = Logger();
+class NetworkResponse {
+  final bool isSuccess;
+  final int statusCode;
+  final Map<String, dynamic>? body;
+  final String? errorMessage;
 
-  static Future<ApiResponse> getRequest({required String url}) async {
+  NetworkResponse({
+    required this.isSuccess,
+    required this.statusCode,
+    this.body,
+    this.errorMessage,
+  });
+}
+
+class NetworkCaller {
+  static const String _defaultErrorMessage = 'Something Went Wrong';
+
+  static Future<NetworkResponse> getRequest({required String url}) async {
     try {
       Uri uri = Uri.parse(url);
-
-      _logRequest(url);
-
+      _logRequest(url, null);
       Response response = await get(uri);
-
       _logResponse(url, response);
-
-      final int statusCode = response.statusCode;
-
       if (response.statusCode == 200) {
-        final decodedData = jsonDecode(response.body);
-        return ApiResponse(
+        final decodedJson = jsonDecode(response.body);
+        return NetworkResponse(
           isSuccess: true,
-          responseCode: statusCode,
-          responseData: decodedData,
+          statusCode: response.statusCode,
+          body: decodedJson,
         );
       } else {
-        final decodedData = jsonDecode(response.body);
-        return ApiResponse(
+        final decodedJson = jsonDecode(response.body);
+        return NetworkResponse(
           isSuccess: false,
-          responseCode: statusCode,
-          responseData: decodedData,
+          statusCode: response.statusCode,
+          errorMessage: decodedJson['data'] ?? _defaultErrorMessage,
         );
-        //failed
       }
-    } on Exception catch (e) {
-      return ApiResponse(
+    } catch (e) {
+      return NetworkResponse(
         isSuccess: false,
-        responseCode: -1,
-        responseData: null,
+        statusCode: -1,
         errorMessage: e.toString(),
       );
     }
   }
 
-  static Future<ApiResponse> postRequest({
+  static Future<NetworkResponse> postRequest({
     required String url,
-    Map<String, dynamic>? body,
+    Map<String, String>? body,
   }) async {
     try {
       Uri uri = Uri.parse(url);
-
-      _logRequest(url, body: body);
-
-      Response response = await post(uri,
-      body: jsonEncode(body),
+      _logRequest(url, body);
+      Response response = await post(
+        uri,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(body),
       );
-
       _logResponse(url, response);
 
-      final int statusCode = response.statusCode;
-
-      if (statusCode == 200 || statusCode == 201) {
-        final decodedData = jsonDecode(response.body);
-        return ApiResponse(
+      if (response.statusCode == 200) {
+        final decodedJson = jsonDecode(response.body);
+        return NetworkResponse(
           isSuccess: true,
-          responseCode: statusCode,
-          responseData: decodedData,
+          statusCode: response.statusCode,
+          body: decodedJson,
         );
       } else {
-        final decodedData = jsonDecode(response.body);
-        return ApiResponse(
+        final decodedJson = jsonDecode(response.body);
+        return NetworkResponse(
           isSuccess: false,
-          responseCode: statusCode,
-          responseData: decodedData,
+          statusCode: response.statusCode,
+          errorMessage: decodedJson['data'] ?? _defaultErrorMessage,
         );
-        //failed
       }
-    } on Exception catch (e) {
-      return ApiResponse(
+    } catch (e) {
+      return NetworkResponse(
         isSuccess: false,
-        responseCode: -1,
-        responseData: null,
+        statusCode: -1,
         errorMessage: e.toString(),
       );
     }
   }
 
-  static void _logRequest(String url, {Map<String, dynamic>? body}) {
-    _logger.i(
-      'url => $url\n'
-      'Request Body: $body',
+  static void _logRequest(String url, Map<String, String>? body) {
+    debugPrint(
+      '============ Request =============\n'
+          'REQUEST\n'
+          'URL  : $url\n'
+          'BODY : $body\n'
+          '=========================\n',
     );
   }
 
   static void _logResponse(String url, Response response) {
-    _logger.i(
-      'url => $url\n'
-      'status Code: ${response.statusCode}\n'
-      'Body: ${response.body}',
+    debugPrint(
+      '============ Respond =============\n'
+          'RESPONSE\n'
+          'URL         : $url\n'
+          'STATUS CODE : ${response.statusCode}\n'
+          'BODY        : ${response.body}\n'
+          '=========================\n',
     );
   }
-}
-
-class ApiResponse {
-  final bool isSuccess;
-  final int responseCode;
-  final dynamic responseData;
-  final String? errorMessage;
-
-  ApiResponse({
-    required this.isSuccess,
-    required this.responseCode,
-    required this.responseData,
-    this.errorMessage = 'something went wrong',
-  });
 }

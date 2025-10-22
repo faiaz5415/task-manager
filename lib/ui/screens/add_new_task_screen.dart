@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/widgets/tm_app_bar.dart';
-
 import '../widgets/screen_background.dart';
 
 
