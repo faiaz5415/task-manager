@@ -3,4 +3,5 @@ class Urls{
 
   static const String registrationUrl = '$_baseUrl/Registration';
   static const String loginUrl = '$_baseUrl/login';
+  static const String updateProfileUrl = '$_baseUrl/profileUpdate';
 }

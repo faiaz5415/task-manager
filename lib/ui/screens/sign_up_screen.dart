@@ -7,7 +7,7 @@ import 'package:task_manager/ui/screens/login_screen.dart';
 import '../../data/service/network_caller.dart';
 import '../../data/services/urls.dart';
 import '../widgets/screen_background.dart';
-import '../widgets/snackbar_message.dart';
+import '../widgets/snack_bar_message.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

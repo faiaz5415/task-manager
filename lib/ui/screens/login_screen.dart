@@ -1,16 +1,17 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager/data/auth_controller.dart';
+import 'package:task_manager/data/models/user_models.dart';
 import 'package:task_manager/ui/screens/forgot_password_verify_email_screen.dart';
 import 'package:task_manager/ui/screens/main_nav_bar_holder_screen.dart';
 import 'package:task_manager/ui/screens/sign_up_screen.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
-import 'package:task_manager/ui/widgets/snackbar_message.dart';
-
+import 'package:task_manager/ui/widgets/snack_bar_message.dart';
 
 import '../../data/services/api_caller.dart';
 import '../../data/services/urls.dart';
-import '../widgets/center_cicular_progress.dart';
+import '../widgets/center_circular_progress.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -151,6 +152,10 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {});
 
       if (response.isSuccess) {
+        final token = response.body!['token'];
+        final user = UserModel.fromJson(response.body!['data']);
+        await AuthController.saveUserInformation(token, user);
+
         Navigator.pushNamedAndRemoveUntil(
           context,
           MainNavBarHolderScreen.name,

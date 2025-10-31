@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:task_manager/data/auth_controller.dart';
 import 'package:task_manager/ui/screens/login_screen.dart';
+import 'package:task_manager/ui/screens/main_nav_bar_holder_screen.dart';
 import 'package:task_manager/ui/utils/asset_paths.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
-   static const String name = '/';
+  static const String name = '/';
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -21,18 +23,21 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _moveToNextScreen() async {
-    await Future.delayed(Duration(seconds: 3));
-    Navigator.pushReplacementNamed(
-      context,
-      LoginScreen.name
-    );
+    await Future.delayed(const Duration(seconds: 3));
+    final bool isLoggedIn = await AuthController.isLoggedIn();
+    if (mounted) {
+      Navigator.pushReplacementNamed(
+        context,
+        isLoggedIn ? MainNavBarHolderScreen.name : LoginScreen.name,
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ScreenBackground(
-        child: Center(child: SvgPicture.asset(AssetPaths.logoSvg, height: 220)),
+        child: Center(child: SvgPicture.asset(AssetPaths.logoSvg, height: 120)),
       ),
     );
   }
