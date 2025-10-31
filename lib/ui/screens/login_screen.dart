@@ -1,14 +1,12 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager/data/service/network_caller.dart' hide NetworkCaller;
-import 'package:task_manager/data/urls.dart';
 import 'package:task_manager/ui/screens/forgot_password_verify_email_screen.dart';
 import 'package:task_manager/ui/screens/main_nav_bar_holder_screen.dart';
 import 'package:task_manager/ui/screens/sign_up_screen.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 import 'package:task_manager/ui/widgets/snackbar_message.dart';
-import 'package:task_manager/ui/widgets/centerd_circular_progress_indicator.dart';
+
 
 import '../../data/services/api_caller.dart';
 import '../../data/services/urls.dart';
