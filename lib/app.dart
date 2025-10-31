@@ -51,7 +51,6 @@ class TaskManagerApp extends StatelessWidget {
         LoginScreen.name : (_) => LoginScreen(),
         SignUpScreen.name : (_) => SignUpScreen(),
         MainNavBarHolderScreen.name : (_) => MainNavBarHolderScreen(),
-        UpdateProfileScreen.name : (_) => UpdateProfileScreen(),
         ForgotPasswordVerifyEmailScreen.name : (_) => ForgotPasswordVerifyEmailScreen(),
         ForgotPasswordVerifyOtpScreen.name : (_) => ForgotPasswordVerifyOtpScreen(),
         SetPasswordScreen.name : (_) => SetPasswordScreen(),
