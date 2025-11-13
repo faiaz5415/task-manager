@@ -2,12 +2,11 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/screens/login_screen.dart';
-
-
 import '../../data/service/network_caller.dart';
 import '../../data/services/urls.dart';
 import '../widgets/screen_background.dart';
 import '../widgets/snack_bar_message.dart';
+import '../widgets/snackbar_message.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -120,7 +119,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Visibility(
                     visible: _signUpInProgress == false,
                     replacement: const Center(child: CircularProgressIndicator()),
-                    child: Center(
+                    child: SizedBox(
+                      width: double.infinity,
                       child: ElevatedButton(
                         onPressed: _onTapSignUpButton,
                         child: const Icon(Icons.arrow_circle_right),
@@ -183,9 +183,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       "lastName" : _lastNameController.text.trim(),
       "mobile" : _phoneController.text.trim(),
       "password" : _passwordController.text,
+      "photo" : "",
     };
 
-    final NetworkResponse response = await NetworkCaller.postRequest(url: Urls.registrationUrl, body:  requestBody);
+    final response = await NetworkCaller.postRequest(url: Urls.registrationUrl, body:  requestBody);
 
     _signUpInProgress = false;
     if(mounted){
